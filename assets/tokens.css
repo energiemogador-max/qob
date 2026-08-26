@@ -1,0 +1,162 @@
+/* ============================================================================
+   QOB — design tokens
+   The whole system changes from this file. Nothing below this file may
+   introduce a raw colour, a font family, or a type size of its own.
+
+   Every value is accountable to the mark: a solid indigo qob (hood) over
+   flat capitals. Indigo is the dye (Tiznit, Tuareg — the honest bridge to
+   Japanese aizome). Écru is undyed Middle Atlas wool. There is no gold,
+   no zellige, no third hue.
+   ============================================================================ */
+
+/* ── Typefaces ────────────────────────────────────────────────────────────
+   Display  Big Shoulders Display — condensed industrial grotesque. Flat caps,
+            tight tracking. Blunt, not luxurious. Used sparingly and large.
+   Body     IBM Plex Sans — plain, engineered, unfashionable in the right way.
+   Arabic   IBM Plex Sans Arabic — a genuine companion, not a fallback. Same
+            family, same weights, matched optical size. /ma/ and the AR locale
+            set in this, never in a system font.
+   Utility  IBM Plex Mono — sizes, prices, SKUs, measurements. Anything that
+            lines up in a column.
+   -------------------------------------------------------------------------- */
+
+:root {
+  --font-display: "Big Shoulders Display", "Haettenschweiler", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-arabic: "IBM Plex Sans Arabic", "Noto Sans Arabic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ── Palette — five named values, dark-first ───────────────────────────
+     Garment photography sits on a near-black indigo. Wool reads warm
+     against it; every Moroccan competitor is on cream.
+     -------------------------------------------------------------------- */
+  --qob-ink:        #0E1226;  /* indigo-black. The ground.                  */
+  --qob-indigo:     #2A3A85;  /* the dye. The mark. The one bold colour.    */
+  --qob-indigo-up:  #5A6ECB;  /* the dye lifted, for links and focus.       */
+  --qob-ecru:       #DED5C2;  /* undyed Middle Atlas wool. Primary text.    */
+  --qob-ecru-dim:   #8A8474;  /* wool in shadow. Secondary text, disabled.  */
+
+  /* Surfaces are the ground shifted, never a new hue. */
+  --surface:        #151A33;
+  --surface-raised: #1D2444;
+  --hairline:       #2A3252;
+
+  /* Semantic states are typographic, not chromatic. Sold out is dimmed and
+     ruled through — it never becomes red. Nothing competes with the indigo. */
+  --state-out:      var(--qob-ecru-dim);
+
+  /* Roles. Components reference these, never the palette directly. */
+  --bg:            var(--qob-ink);
+  --bg-raised:     var(--surface);
+  --bg-sunk:       #0A0D1C;
+  --text:          var(--qob-ecru);
+  --text-dim:      var(--qob-ecru-dim);
+  --text-strong:   #F2ECE0;
+  --accent:        var(--qob-indigo-up);
+  --accent-solid:  var(--qob-indigo);
+  --on-accent:     #F2ECE0;
+  --rule:          var(--hairline);
+
+  /* ── Type scale ────────────────────────────────────────────────────────
+     Mobile-first. The display face only appears at the top two steps.
+     -------------------------------------------------------------------- */
+  --step--2: 0.6875rem;  /* 11px — labels, legal            */
+  --step--1: 0.8125rem;  /* 13px — utility, captions        */
+  --step-0:  1rem;       /* 16px — body                     */
+  --step-1:  1.125rem;   /* 18px — lead body                */
+  --step-2:  clamp(1.5rem, 4vw, 2rem);        /* section heads  */
+  --step-3:  clamp(2.25rem, 9vw, 3.5rem);     /* product title  */
+  --step-4:  clamp(3rem, 14vw, 6rem);         /* display only   */
+
+  --tracking-caps: 0.14em;   /* utility labels                 */
+  --tracking-tight: -0.02em; /* display, flat caps, set tight  */
+  --measure: 62ch;
+
+  /* ── Space ─────────────────────────────────────────────────────────────
+     One ratio, no arbitrary values in components.
+     -------------------------------------------------------------------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;
+  --sp-9: 7rem;
+
+  --gutter: var(--sp-4);
+  --page-max: 1440px;
+  --prose-max: 68ch;
+
+  /* ── The signature ─────────────────────────────────────────────────────
+     The qob is a pointed arch. It appears in exactly ONE place on the site:
+     as the mask on the lead product image. Not on buttons, not on cards,
+     not as a bullet. Repeating it would make it decoration.
+     -------------------------------------------------------------------- */
+  --arch: polygon(
+      50% 0%, 60% 2%, 70% 6%, 79% 13%, 87% 22%, 93% 33%, 97% 45%, 100% 58%,
+      100% 100%, 0% 100%, 0% 58%,
+      3% 45%, 7% 33%, 13% 22%, 21% 13%, 30% 6%, 40% 2%
+    );
+
+  --radius: 0px;      /* the brand does not round corners */
+  --radius-pill: 0px;
+
+  /* ── Motion ────────────────────────────────────────────────────────────
+     One orchestrated moment: the product page load. Everything else is a
+     120ms colour shift. Scattered effects read as generated.
+     -------------------------------------------------------------------- */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-tap: 120ms;
+  --dur-reveal: 620ms;
+}
+
+/* ── Light theme ───────────────────────────────────────────────────────────
+   Écru ground, indigo ink. The same five values, reassigned — never a
+   second palette.
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --surface:        #E7DFCE;
+    --surface-raised: #F0E9DA;
+    --hairline:       #C6BCA6;
+
+    --bg:           #DED5C2;
+    --bg-raised:    var(--surface-raised);
+    --bg-sunk:      #D2C8B3;
+    --text:         #0E1226;
+    --text-dim:     #5C5A5A;
+    --text-strong:  #0E1226;
+    --accent:       var(--qob-indigo);
+    --accent-solid: var(--qob-indigo);
+    --on-accent:    #F0E9DA;
+    --rule:         var(--hairline);
+    --state-out:    #8A8474;
+  }
+}
+
+:root[data-theme="light"] {
+  --surface:        #E7DFCE;
+  --surface-raised: #F0E9DA;
+  --hairline:       #C6BCA6;
+
+  --bg:           #DED5C2;
+  --bg-raised:    var(--surface-raised);
+  --bg-sunk:      #D2C8B3;
+  --text:         #0E1226;
+  --text-dim:     #5C5A5A;
+  --text-strong:  #0E1226;
+  --accent:       var(--qob-indigo);
+  --accent-solid: var(--qob-indigo);
+  --on-accent:    #F0E9DA;
+  --rule:         var(--hairline);
+  --state-out:    #8A8474;
+}
+
+@media (min-width: 48rem) {
+  :root { --gutter: var(--sp-6); }
+}
+@media (min-width: 75rem) {
+  :root { --gutter: var(--sp-7); }
+}

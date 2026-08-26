@@ -1,0 +1,548 @@
+/* ============================================================================
+   QOB — components
+   Every value here comes from tokens.css. No raw colours, no raw type sizes.
+
+   Written with logical properties throughout (inline-start/end, margin-inline)
+   so the AR locale mirrors for real rather than bolting `direction: rtl` onto
+   a left-handed layout.
+
+   Specificity discipline: section-level rules set layout and never padding
+   that an element-level rule also sets. Where both would apply, the element
+   wins by owning the property outright.
+   ============================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body:lang(ar) { font-family: var(--font-arabic); }
+
+img, svg { max-width: 100%; display: block; }
+img { height: auto; }
+
+a { color: var(--accent); text-underline-offset: 0.25em; }
+
+:where(a, button, input, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.u-visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ── Utility type ──────────────────────────────────────────────────────── */
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* ── The mark ──────────────────────────────────────────────────────────────
+   Flat capitals, hard face, tight tracking. The hood over the Q is the only
+   flourish. One colour — it inherits currentColor, so the reversed version
+   is the same file on a different ground.
+   -------------------------------------------------------------------------- */
+.mark {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0;
+  color: var(--text-strong);
+  text-decoration: none;
+  line-height: 1;
+}
+.mark__word {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.75rem;
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+}
+.mark__hood {
+  position: absolute;
+  inset-block-start: -0.42em;
+  inset-inline-start: 0.02em;
+  inline-size: 0.52em;
+  block-size: 0.46em;
+  fill: currentColor;
+}
+.mark--lg .mark__word { font-size: 3rem; }
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-block: var(--sp-4);
+  padding-inline: var(--gutter);
+  border-block-end: 1px solid var(--rule);
+  position: sticky;
+  inset-block-start: 0;
+  background: var(--bg);
+  z-index: 20;
+}
+.site-nav { display: none; gap: var(--sp-5); }
+.site-nav a {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color var(--dur-tap) var(--ease);
+}
+.site-nav a:hover { color: var(--text); }
+.site-nav a[aria-current="page"] { color: var(--text); }
+@media (min-width: 60rem) { .site-nav { display: flex; } }
+
+.header-end {
+  display: flex; align-items: center; gap: var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+.header-end a { color: var(--text-dim); text-decoration: none; }
+.header-end a:hover { color: var(--text); }
+
+/* ── Breadcrumb ────────────────────────────────────────────────────────── */
+.breadcrumb {
+  padding-inline: var(--gutter);
+  padding-block: var(--sp-4) 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+.breadcrumb a { color: var(--text-dim); text-decoration: none; }
+.breadcrumb a:hover { color: var(--text); text-decoration: underline; }
+.breadcrumb span[aria-current] { color: var(--text); }
+
+/* ── Product layout ────────────────────────────────────────────────────────
+   Mobile: gallery full-bleed, then the information stack.
+   Desktop: gallery holds the left 55%, the stack sticks alongside it.
+   -------------------------------------------------------------------------- */
+.pdp {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
+  padding-block-end: var(--sp-8);
+}
+@media (min-width: 60rem) {
+  .pdp {
+    grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+    gap: var(--sp-7);
+    align-items: start;
+    padding-inline: var(--gutter);
+    max-width: var(--page-max);
+    margin-inline: auto;
+  }
+}
+
+/* ── Gallery ───────────────────────────────────────────────────────────────
+   The signature, used once: the lead image sits inside the qob arch. The
+   arch is taller than it is wide, which is the shape of a standing garment.
+   Detail crops below it are plain rectangles — the gesture is not repeated.
+   -------------------------------------------------------------------------- */
+.gallery { display: grid; gap: var(--sp-3); }
+
+.gallery__lead {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: var(--bg-sunk);
+  clip-path: var(--arch);
+  overflow: hidden;
+}
+.gallery__lead img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+
+.gallery__strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 28%;
+  gap: var(--sp-2);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: var(--gutter);
+  scrollbar-width: thin;
+}
+.gallery__strip > * { scroll-snap-align: start; }
+@media (min-width: 60rem) {
+  .gallery__strip { grid-auto-columns: 1fr; grid-auto-flow: column; overflow: visible; padding-inline: 0; }
+}
+
+.shot {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--bg-sunk);
+  border: 1px solid var(--rule);
+  display: grid;
+  place-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  text-align: center;
+}
+.shot--lead { aspect-ratio: 3 / 4; border: 0; }
+
+/* Photography does not exist yet. Rather than inventing a path, each slot
+   states what belongs in it and where the file will live. */
+.shot__slot {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.shot__slot b {
+  display: block;
+  color: var(--text);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  margin-block-end: var(--sp-2);
+}
+
+/* ── Information stack ─────────────────────────────────────────────────── */
+.info { padding-inline: var(--gutter); display: grid; gap: var(--sp-5); }
+@media (min-width: 60rem) {
+  .info { padding-inline: 0; position: sticky; inset-block-start: var(--sp-8); }
+}
+
+.info__head { display: grid; gap: var(--sp-2); }
+
+.heritage-line {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 0;
+}
+.heritage-line a { color: var(--text-dim); }
+
+.pdp__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--step-3);
+  line-height: 0.92;
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--text-strong);
+  text-wrap: balance;
+}
+
+.price {
+  font-family: var(--font-mono);
+  font-size: var(--step-1);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  margin: 0;
+}
+.price s { color: var(--text-dim); text-decoration-thickness: 1px; margin-inline-end: var(--sp-2); }
+
+/* ── Variant selectors ─────────────────────────────────────────────────────
+   Out of stock is visible and disabled, never hidden. Two distinct states:
+   sold out (a variant that exists and is gone) and not made (a combination
+   that was never offered). A shopper needs to be able to tell the difference.
+   -------------------------------------------------------------------------- */
+.picker { display: grid; gap: var(--sp-3); }
+.picker__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-3); }
+.picker__value { font-family: var(--font-mono); font-size: var(--step--1); color: var(--text); }
+
+.swatches { display: flex; gap: var(--sp-3); flex-wrap: wrap; margin: 0; padding: 0; border: 0; }
+
+.swatch {
+  --ring: transparent;
+  position: relative;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--rule);
+  background: var(--swatch-colour);
+  cursor: pointer;
+  box-shadow: inset 0 0 0 2px var(--bg), 0 0 0 1px var(--ring);
+  transition: box-shadow var(--dur-tap) var(--ease);
+}
+.swatch[aria-pressed="true"] { --ring: var(--accent); box-shadow: inset 0 0 0 2px var(--bg), 0 0 0 2px var(--ring); }
+.swatch:disabled { cursor: not-allowed; opacity: 0.4; }
+
+.sizes { display: flex; gap: var(--sp-2); flex-wrap: wrap; margin: 0; padding: 0; border: 0; }
+
+.size {
+  min-inline-size: 3.5rem;
+  padding-block: var(--sp-3);
+  padding-inline: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.06em;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  position: relative;
+  transition: border-color var(--dur-tap) var(--ease), color var(--dur-tap) var(--ease);
+}
+.size:hover:not(:disabled) { border-color: var(--text); }
+.size[aria-pressed="true"] { border-color: var(--accent); color: var(--text-strong); box-shadow: inset 0 0 0 1px var(--accent); }
+
+.size:disabled { color: var(--state-out); cursor: not-allowed; border-color: var(--rule); }
+/* sold out — ruled through */
+.size[data-state="out"]::after {
+  content: ""; position: absolute; inset-inline: 12%; inset-block-start: 50%;
+  border-block-start: 1px solid var(--state-out);
+  transform: rotate(-14deg);
+}
+/* never offered — dotted border, no rule */
+.size[data-state="unmade"] { border-style: dotted; opacity: 0.55; }
+
+.stock-note {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin: 0;
+  min-block-size: 1.2em;
+}
+.stock-note[data-low="true"] { color: var(--text); }
+
+/* ── Buy ───────────────────────────────────────────────────────────────── */
+.buy {
+  inline-size: 100%;
+  padding-block: var(--sp-4);
+  padding-inline: var(--sp-5);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--on-accent);
+  background: var(--accent-solid);
+  border: 1px solid var(--accent-solid);
+  cursor: pointer;
+  transition: background var(--dur-tap) var(--ease), border-color var(--dur-tap) var(--ease);
+}
+.buy:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); }
+.buy:disabled { background: transparent; color: var(--state-out); border-color: var(--rule); cursor: not-allowed; }
+
+.sku-line {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* ── Fit note ──────────────────────────────────────────────────────────────
+   Fit ambiguity is the number one driver of returns, so this is not tucked
+   into a tab. It sits directly under the selector, in body type.
+   -------------------------------------------------------------------------- */
+.fit {
+  display: grid;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  background: var(--bg-raised);
+  border-inline-start: 2px solid var(--accent-solid);
+}
+.fit p { margin: 0; font-size: var(--step--1); }
+.fit .num { color: var(--text-strong); }
+
+.size-guide-open {
+  align-self: start;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  cursor: pointer;
+}
+
+/* ── Detail blocks ─────────────────────────────────────────────────────── */
+.spec { border-block-start: 1px solid var(--rule); padding-block-start: var(--sp-4); display: grid; gap: var(--sp-3); }
+.spec h2 {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 0;
+}
+.spec dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: var(--sp-2) var(--sp-4); font-size: var(--step--1); }
+.spec dt { color: var(--text-dim); }
+.spec dd { margin: 0; color: var(--text); }
+
+.terms { display: grid; gap: var(--sp-3); margin: 0; }
+.terms div { display: grid; gap: var(--sp-1); }
+.terms dt {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+.terms dd { margin: 0; font-size: var(--step--1); color: var(--text-dim); max-width: var(--measure); }
+
+.care { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--sp-2); font-size: var(--step--1); color: var(--text-dim); }
+.care li { padding-inline-start: var(--sp-4); position: relative; }
+.care li::before { content: "—"; position: absolute; inset-inline-start: 0; color: var(--text-dim); }
+
+.returns {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-3);
+  padding-block: var(--sp-4);
+  border-block: 1px solid var(--rule);
+  font-size: var(--step--1);
+}
+.returns a { color: var(--accent); }
+
+/* ── Cross-link: heritage ⇄ street ─────────────────────────────────────────
+   In-content, with real copy. Not a sidebar widget.
+   -------------------------------------------------------------------------- */
+.crosslink {
+  max-width: var(--prose-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: var(--sp-8);
+  border-block-start: 1px solid var(--rule);
+}
+.crosslink h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  margin: 0 0 var(--sp-4);
+  color: var(--text-strong);
+}
+.crosslink p { margin: 0 0 var(--sp-4); color: var(--text-dim); }
+.crosslink p:last-child { margin-block-end: 0; }
+
+/* ── Size guide modal ──────────────────────────────────────────────────── */
+dialog.guide {
+  border: 1px solid var(--rule);
+  background: var(--bg-raised);
+  color: var(--text);
+  padding: 0;
+  inline-size: min(92vw, 46rem);
+  max-block-size: 86vh;
+}
+dialog.guide::backdrop { background: rgb(0 0 0 / 0.7); }
+.guide__head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-5) var(--sp-3);
+  border-block-end: 1px solid var(--rule);
+}
+.guide__head h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  letter-spacing: var(--tracking-tight);
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--text-strong);
+}
+.guide__close {
+  background: none; border: 1px solid var(--rule); color: var(--text);
+  font-family: var(--font-mono); font-size: var(--step--2);
+  letter-spacing: var(--tracking-caps); text-transform: uppercase;
+  padding: var(--sp-2) var(--sp-3); cursor: pointer;
+}
+.guide__body { padding: var(--sp-5); overflow: auto; }
+.guide__note { font-size: var(--step--1); color: var(--text-dim); margin: 0 0 var(--sp-4); }
+.guide__scroll { overflow-x: auto; }
+table.measures {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+table.measures th, table.measures td {
+  text-align: start;
+  padding: var(--sp-3);
+  border-block-end: 1px solid var(--rule);
+  white-space: nowrap;
+}
+table.measures thead th {
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+table.measures tbody th { color: var(--text-strong); font-weight: 700; }
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+.site-footer {
+  border-block-start: 1px solid var(--rule);
+  padding-block: var(--sp-7);
+  padding-inline: var(--gutter);
+  display: grid;
+  gap: var(--sp-5);
+  font-size: var(--step--1);
+  color: var(--text-dim);
+}
+.footer-links { display: flex; flex-wrap: wrap; gap: var(--sp-4); margin: 0; padding: 0; list-style: none; }
+.footer-links a { color: var(--text-dim); text-decoration: none; }
+.footer-links a:hover { color: var(--text); text-decoration: underline; }
+
+/* EU AI Act Article 50. Visible, not buried. */
+.ai-disclosure {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.locale-switch { display: flex; gap: var(--sp-3); font-family: var(--font-mono); font-size: var(--step--2); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+.locale-switch a { color: var(--text-dim); text-decoration: none; }
+.locale-switch a[aria-current] { color: var(--text-strong); text-decoration: underline; text-underline-offset: 0.3em; }
+
+/* ── The one orchestrated moment ───────────────────────────────────────────
+   The product page assembles once on load: image, then title, then price,
+   then the selectors. 620ms total. There is nothing else on the site that
+   moves, which is what makes this read as deliberate rather than decorated.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { animation: qob-rise var(--dur-reveal) var(--ease) backwards; }
+  .reveal:nth-child(1) { animation-delay: 0ms; }
+  .reveal:nth-child(2) { animation-delay: 80ms; }
+  .reveal:nth-child(3) { animation-delay: 160ms; }
+  .reveal:nth-child(4) { animation-delay: 240ms; }
+  .reveal:nth-child(5) { animation-delay: 320ms; }
+  .gallery__lead { animation: qob-unmask var(--dur-reveal) var(--ease) backwards; }
+}
+@keyframes qob-rise {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes qob-unmask {
+  from { opacity: 0; transform: scale(1.03); }
+  to   { opacity: 1; transform: none; }
+}
