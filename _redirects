@@ -1,0 +1,16 @@
+# Force HTTPS and the apex host
+http://qob.co/*            https://qob.co/:splat   301!
+https://www.qob.co/*       https://qob.co/:splat   301!
+
+# One trailing-slash convention: directories always end in /
+/ma/:cat                   /ma/:cat/               301
+/ma/ar/:cat                /ma/ar/:cat/            301
+
+# Locale roots
+/ar/*                      /ma/ar/:splat           301
+
+# EU locales are declared in products-index.json but not built yet.
+/fr/*                      /ma/:splat              302
+/en/*                      /ma/:splat              302
+
+/*                         /404.html               404
