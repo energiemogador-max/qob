@@ -1,0 +1,21 @@
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Permitted-Cross-Domain-Policies: none
+  Content-Security-Policy: upgrade-insecure-requests; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://wa.me https://api.whatsapp.com
+
+# ONE non-overlapping rule per path. Cloudflare merges overlapping rules and
+# `immutable` then wins, freezing files for a year — this cost novastyle real
+# time. 1h + must-revalidate means a hard refresh always gets the latest.
+/assets/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Images never change in place — a new photo means a new filename.
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.html
+  Cache-Control: public, max-age=600, must-revalidate
