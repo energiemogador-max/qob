@@ -16,25 +16,25 @@
 
 :root {
   /* ── Palette — sampled out of the logo artwork ───────────────────────── */
-  --navy:    #101d3e;   /* the ground                          */
-  --navy-2:  #182b59;   /* the script wordmark; raised panels  */
-  --navy-3:  #1f2f5c;   /* hairlines on navy                   */
-  --teal:    #2b93b8;   /* the qob, lifted to carry on navy    */
-  --teal-d:  #1a7194;   /* the qob as drawn                    */
-  --gold:    #cca75d;   /* the small hood, the zellige infill  */
-  --beige:   #e8e4d9;   /* the plate the artwork sits on       */
-  --beige-2: #f4f1e9;
+  --navy:    #101d3e;   /* wordmark, darkest step; hero plate + band ground */
+  --navy-2:  #182b59;   /* the wordmark as drawn; body text                 */
+  --navy-3:  #1f2f5c;   /* hairlines on navy                                */
+  --teal:    #2b93b8;   /* the qob as drawn — reserved for dark grounds     */
+  --teal-ink:#175E78;   /* teal darkened until it is AA-safe on beige       */
+  --gold:    #cca75d;   /* the small hood — rules and the cap, never text   */
+  --beige:   #e8e4d9;   /* the plate the artwork sits on; the page ground   */
+  --beige-2: #f4f1e9;   /* raised cards and panels                          */
 
-  --bg:        var(--navy);
-  --panel:     var(--navy-2);
-  --text:      var(--beige);
-  --text-dim:  rgb(232 228 217 / .62);
-  --text-faint:rgb(232 228 217 / .38);
-  --rule:      rgb(232 228 217 / .16);
-  --rule-soft: rgb(232 228 217 / .09);
+  --bg:        var(--beige);
+  --panel:     var(--beige-2);
+  --text:      var(--navy);
+  --text-dim:  rgb(24 43 89 / .78);
+  --text-faint:rgb(24 43 89 / .52);
+  --rule:      rgb(24 43 89 / .20);
+  --rule-soft: rgb(24 43 89 / .11);
 
   /* Sold out is typographic — dimmed and ruled. Never red, never a new hue. */
-  --state-out: rgb(232 228 217 / .3);
+  --state-out: rgb(24 43 89 / .34);
 
   /* ── Type ────────────────────────────────────────────────────────────── */
   --display: "Instrument Serif", Georgia, serif;   /* editorial, set huge and tight */
@@ -78,10 +78,10 @@ body {
 html[lang="ar"] body { font-family: var(--arabic); line-height: 1.85; }
 
 img, svg { display: block; max-width: 100%; }
-a { color: var(--gold); text-underline-offset: .25em; }
+a { color: var(--teal-ink); text-underline-offset: .25em; }
 
 :where(a, button, input, select, summary, [tabindex]):focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--teal-ink);
   outline-offset: 3px;
 }
 
@@ -148,7 +148,7 @@ html[lang="ar"] .selvedge {
   text-transform: uppercase; text-decoration: none; color: var(--text-dim);
   transition: color 150ms var(--ease);
 }
-.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--gold); }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--teal-ink); }
 html[lang="ar"] .site-nav a { text-transform: none; letter-spacing: 0; font-size: var(--t--1); }
 @media (max-width: 44rem) {
   .site-nav ul { gap: var(--sp-4); }
@@ -158,16 +158,16 @@ html[lang="ar"] .site-nav a { text-transform: none; letter-spacing: 0; font-size
 /* ── Buttons — square, flat, no lift ────────────────────────────────────── */
 .btn {
   display: inline-block; cursor: pointer;
-  background: var(--gold); color: var(--navy);
+  background: var(--teal-ink); color: #fff;
   padding: .95rem 2rem;
   font-family: var(--body); font-size: var(--t--2); font-weight: 700;
   letter-spacing: var(--track); text-transform: uppercase; text-decoration: none;
-  border: 1px solid var(--gold);
+  border: 1px solid var(--teal-ink);
   transition: background 150ms var(--ease), color 150ms var(--ease);
 }
-.btn:hover { background: transparent; color: var(--gold); }
-.btn--ghost { background: transparent; color: var(--text); border-color: var(--rule); }
-.btn--ghost:hover { background: var(--text); color: var(--navy); border-color: var(--text); }
+.btn:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
+.btn--ghost { background: transparent; color: var(--navy); border-color: var(--gold); }
+.btn--ghost:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
 .btn--block { display: block; width: 100%; text-align: center; }
 .btn:disabled, .btn[aria-disabled="true"] {
   background: transparent; color: var(--state-out); border-color: var(--rule-soft);
@@ -184,11 +184,11 @@ html[lang="ar"] .btn { text-transform: none; letter-spacing: 0; font-size: var(-
   text-wrap: balance;
 }
 html[lang="ar"] .display { font-family: var(--arabic); line-height: 1.2; letter-spacing: 0; }
-.display em { font-style: italic; color: var(--gold); }
+.display em { font-style: italic; color: var(--teal-ink); }
 
 .kicker {
   margin: 0; font-size: var(--t--2); letter-spacing: var(--track);
-  text-transform: uppercase; color: var(--gold);
+  text-transform: uppercase; color: var(--teal-ink);
 }
 html[lang="ar"] .kicker { text-transform: none; letter-spacing: 0; font-size: var(--t--1); }
 
@@ -222,12 +222,12 @@ html[lang="ar"] .label { text-transform: none; letter-spacing: 0; font-size: var
   .hero { grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); gap: var(--sp-8); }
 }
 .hero__plate {
-  background: var(--panel);
+  background: var(--navy);
   padding: var(--sp-7) var(--sp-6);
   display: grid; place-items: center;
   border-block-start: 2px solid var(--gold);
 }
-.hero__plate img { width: min(420px, 74%); height: auto; }
+.hero__plate img { width: min(420px, 78%); height: auto; }
 .hero__body { display: grid; gap: var(--sp-5); justify-items: start; }
 .hero__body .display { font-size: var(--t-4); }
 
@@ -251,7 +251,7 @@ html[lang="ar"] .label { text-transform: none; letter-spacing: 0; font-size: var
 }
 .piece__no {
   font-family: var(--display); font-size: clamp(1.6rem, 4vw, 2.6rem);
-  line-height: 1; color: var(--gold); margin: 0;
+  line-height: 1; color: var(--text-faint); margin: 0;
   font-variant-numeric: tabular-nums;
 }
 .piece__plate {
@@ -274,7 +274,7 @@ html[lang="ar"] .piece__title { font-family: var(--arabic); line-height: 1.3; }
 /* No photography exists yet, so no path is invented — every plate names the
    file that belongs in it. */
 .slot { margin: 0; font-size: var(--t--2); color: var(--text-faint); line-height: 1.7; overflow-wrap: anywhere; }
-.slot b { display: block; text-transform: uppercase; letter-spacing: var(--track); color: var(--gold); margin-block-end: var(--sp-2); }
+.slot b { display: block; text-transform: uppercase; letter-spacing: var(--track); color: var(--teal-ink); margin-block-end: var(--sp-2); }
 
 /* ══ Category header ═════════════════════════════════════════════════════
    Editorial, with body copy above the grid, because that copy is what ranks.
@@ -290,7 +290,18 @@ html[lang="ar"] .cat-head h1 { font-family: var(--arabic); line-height: 1.2; let
    The mechanism the category tree is built on: in-content, with real copy,
    never a sidebar widget. The mark bleeds off the edge at scale rather than
    sitting politely inside the box. */
-.band { position: relative; overflow: hidden; background: var(--panel); padding-block: var(--sp-8); border-block-start: 2px solid var(--gold); }
+.band {
+  position: relative; overflow: hidden;
+  background: var(--navy); padding-block: var(--sp-8);
+  border-block-start: 2px solid var(--gold);
+  /* Scoped inversion: the band carries its own roles so the light page tokens
+     never leak in. It is also the only place gold is safe on text — 5.9:1 on
+     navy, against 1.8:1 on beige. */
+  --text: var(--beige);
+  --text-dim: rgb(232 228 217 / .74);
+  --rule: rgb(232 228 217 / .22);
+  color: var(--beige);
+}
 .band__mark {
   position: absolute; inset-block-start: 50%; inset-inline-end: -8%;
   transform: translateY(-50%);
@@ -302,9 +313,12 @@ html[lang="ar"] .cat-head h1 { font-family: var(--arabic); line-height: 1.2; let
           mask-image: linear-gradient(to bottom, #000 60%, transparent 92%);
 }
 .band__inner { position: relative; max-width: 50ch; display: grid; gap: var(--sp-4); justify-items: start; }
-.band h2 { font-family: var(--display); font-weight: 400; font-size: var(--t-3); margin: 0; line-height: 1; }
+.band h2 { font-family: var(--display); font-weight: 400; font-size: var(--t-3); margin: 0; line-height: 1; color: var(--beige); }
 html[lang="ar"] .band h2 { font-family: var(--arabic); line-height: 1.3; }
-.band p { margin: 0; color: var(--text-dim); }
+.band p { margin: 0; color: rgb(232 228 217 / .78); }
+.band a { color: var(--gold); }
+.band .btn--ghost { color: var(--beige); border-color: var(--gold); }
+.band .btn--ghost:hover { background: var(--gold); color: var(--navy); }
 @media (max-width: 48rem) {
   .band__mark { inset-block-start: auto; inset-block-end: -10%; inset-inline-end: -22%; transform: none; width: 46vw; opacity: .16; }
 }
@@ -343,7 +357,7 @@ html[lang="ar"] .pdp__title { font-family: var(--arabic); line-height: 1.3; lett
   box-shadow: inset 0 0 0 2px var(--bg), 0 0 0 1px transparent;
   transition: box-shadow 150ms var(--ease);
 }
-.swatch[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--bg), 0 0 0 2px var(--gold); }
+.swatch[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--bg), 0 0 0 2px var(--teal-ink); }
 
 .size {
   min-inline-size: 3.3rem; padding: .7rem .8rem; cursor: pointer;
@@ -352,7 +366,7 @@ html[lang="ar"] .pdp__title { font-family: var(--arabic); line-height: 1.3; lett
   transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease);
 }
 .size:hover:not(:disabled) { border-color: var(--text); }
-.size[aria-pressed="true"] { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); color: var(--gold); }
+.size[aria-pressed="true"] { border-color: var(--teal-ink); box-shadow: inset 0 0 0 1px var(--teal-ink); color: var(--teal-ink); }
 .size:disabled { color: var(--state-out); cursor: not-allowed; border-color: var(--rule-soft); }
 .size[data-state="out"]::after {
   content: ""; position: absolute; inset-inline: 14%; inset-block-start: 50%;
@@ -361,7 +375,7 @@ html[lang="ar"] .pdp__title { font-family: var(--arabic); line-height: 1.3; lett
 .size[data-state="unmade"] { border-style: dotted; opacity: .55; }
 
 .stock-note { margin: 0; min-block-size: 1.2em; font-size: var(--t--2); color: var(--text-faint); }
-.stock-note[data-low="true"] { color: var(--gold); }
+.stock-note[data-low="true"] { color: var(--teal-ink); font-weight: 600; }
 .sku-line { margin: 0; font-size: var(--t--2); color: var(--text-faint); font-variant-numeric: tabular-nums; }
 
 /* ── Fit note ────────────────────────────────────────────────────────────
@@ -374,7 +388,7 @@ html[lang="ar"] .pdp__title { font-family: var(--arabic); line-height: 1.3; lett
 .linkish {
   align-self: start; background: none; border: 0; padding: 0; cursor: pointer;
   font-family: var(--body); font-size: var(--t--2); letter-spacing: var(--track);
-  text-transform: uppercase; color: var(--gold); text-decoration: underline;
+  text-transform: uppercase; color: var(--teal-ink); text-decoration: underline;
   text-underline-offset: .3em;
 }
 html[lang="ar"] .linkish { text-transform: none; letter-spacing: 0; font-size: var(--t--1); }
@@ -387,7 +401,7 @@ html[lang="ar"] .spec h2 { text-transform: none; letter-spacing: 0; font-size: v
 .spec dd { margin: 0; color: var(--text-dim); }
 .spec dl.terms { display: grid; grid-template-columns: 1fr; gap: var(--sp-4); }
 .terms > div { display: grid; gap: var(--sp-1); }
-.terms dt { font-weight: 700; color: var(--gold); letter-spacing: .04em; }
+.terms dt { font-weight: 700; color: var(--teal-ink); letter-spacing: .04em; }
 .terms dd { color: var(--text-dim); }
 .care { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--sp-2); font-size: var(--t--1); color: var(--text-dim); }
 .care li { padding-inline-start: var(--sp-4); position: relative; }
@@ -407,7 +421,7 @@ dialog.guide::backdrop { background: rgb(9 15 32 / .78); }
 table.measures { inline-size: 100%; border-collapse: collapse; font-size: var(--t--1); font-variant-numeric: tabular-nums; }
 table.measures th, table.measures td { text-align: start; padding: var(--sp-3); border-block-end: 1px solid var(--rule-soft); white-space: nowrap; }
 table.measures thead th { font-size: var(--t--2); letter-spacing: var(--track); text-transform: uppercase; color: var(--text-faint); font-weight: 700; }
-table.measures tbody th { color: var(--gold); font-weight: 700; }
+table.measures tbody th { color: var(--navy); font-weight: 700; }
 
 /* ── Long-form ─────────────────────────────────────────────────────────── */
 .page-head { padding-block: var(--sp-8) var(--sp-5); }
@@ -424,10 +438,10 @@ html[lang="ar"] .body-copy h2 { font-family: var(--arabic); }
 @media (min-width: 48rem) { .footer-grid { grid-template-columns: 1fr auto; align-items: start; } }
 .footer-links { display: flex; flex-wrap: wrap; gap: var(--sp-4); list-style: none; margin: 0; padding: 0; }
 .footer-links a { color: var(--text-dim); text-decoration: none; }
-.footer-links a:hover { color: var(--gold); }
+.footer-links a:hover { color: var(--teal-ink); }
 .locale-switch { display: flex; gap: var(--sp-4); margin: 0; }
 .locale-switch a { color: var(--text-dim); text-decoration: none; }
-.locale-switch a:hover { color: var(--gold); }
+.locale-switch a:hover { color: var(--teal-ink); }
 .legal { margin: var(--sp-5) 0 0; font-size: var(--t--2); color: var(--text-faint); max-width: 64ch; }
 
 /* ── Motion — one moment, on load, and nothing else ────────────────────── */

@@ -207,7 +207,7 @@ def shell(loc, *, title, desc, canonical, alts_map, body, jsonld=None, head_extr
 
 <header class="site-header">
   <a class="brand" href="{url(loc)}" aria-label="QOB Atelier">
-    <img src="{asset("/assets/logo/qob-logo-rev.svg")}" alt="QOB" width="1096" height="982">
+    <img src="{asset("/assets/logo/qob-logo.svg")}" alt="QOB" width="1096" height="982">
   </a>
   <nav class="site-nav" aria-label="{e(u['main_nav'])}">
     <ul>{nav_items}<li><a href="{url(loc, 'panier')}">{e(u['cart'])} (0)</a></li></ul>
@@ -761,7 +761,7 @@ def build_root_redirect(pages):
 </head>
 <body>
 <main id="main" class="hero">
-  <img class="hero__logo" src="{asset("/assets/logo/qob-logo-rev.svg")}" alt="QOB" width="1096" height="982">
+  <img class="hero__logo" src="{asset("/assets/logo/qob-logo.svg")}" alt="QOB" width="1096" height="982">
   <p class="hero__tag">QOB Atelier — Casablanca</p>
   <p class="locale-switch" style="justify-content:center;gap:var(--sp-5)">
     <a href="{BASE}/ma/">Français</a>
