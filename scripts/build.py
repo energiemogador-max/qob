@@ -30,6 +30,10 @@ from datetime import date
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INDEX = os.path.join(ROOT, "products-index.json")
 SITE = "https://qob.co"
+# Path prefix the site is served under. "" for a domain root;
+# "/qob" for GitHub project Pages. Override with QOB_BASE.
+BASE = os.environ.get("QOB_BASE", "/qob").rstrip("/")
+IS_PREVIEW = BASE != ""
 NL = chr(10)
 
 EMIT_EU = False   # flip on when /fr/ and /en/ have prices and real copy
@@ -124,9 +128,22 @@ def money(amount, loc):
 
 
 def url(loc, *parts):
+    """In-page URL, carrying the deploy prefix."""
+    prefix = BASE + LOCALES[loc][0]
+    path = "/".join(str(p).strip("/") for p in parts if p)
+    return f"{prefix}/{path}/" if path else f"{prefix}/"
+
+
+def canon(loc, *parts):
+    """Production URL — never carries BASE, so canonicals and hreflang always
+    point at the real origin even when previewing from a subpath."""
     prefix = LOCALES[loc][0]
     path = "/".join(str(p).strip("/") for p in parts if p)
     return f"{prefix}/{path}/" if path else f"{prefix}/"
+
+
+def asset(path):
+    return BASE + path
 
 
 def write(path, content):
@@ -171,16 +188,17 @@ def shell(loc, *, title, desc, canonical, alts_map, body, jsonld=None, head_extr
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{SITE}{canonical}">
+{'<meta name="robots" content="noindex,nofollow">' if IS_PREVIEW else ''}
 {alts}
 <meta property="og:type" content="website">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:url" content="{SITE}{canonical}">
 <meta property="og:site_name" content="QOB Atelier">
-<link rel="icon" href="/assets/logo/qob-mark.svg" type="image/svg+xml">
+<link rel="icon" href="{asset("/assets/logo/qob-mark.svg")}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Karla:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/assets/qob.css">
+<link rel="stylesheet" href="{asset("/assets/qob.css")}">
 {head_extra}
 {ld}
 </head>
@@ -189,7 +207,7 @@ def shell(loc, *, title, desc, canonical, alts_map, body, jsonld=None, head_extr
 
 <header class="site-header">
   <a class="brand" href="{url(loc)}" aria-label="QOB Atelier">
-    <img src="/assets/logo/qob-logo-rev.svg" alt="QOB" width="1096" height="982">
+    <img src="{asset("/assets/logo/qob-logo-rev.svg")}" alt="QOB" width="1096" height="982">
   </a>
   <nav class="site-nav" aria-label="{e(u['main_nav'])}">
     <ul>{nav_items}<li><a href="{url(loc, 'panier')}">{e(u['cart'])} (0)</a></li></ul>
@@ -210,7 +228,7 @@ def shell(loc, *, title, desc, canonical, alts_map, body, jsonld=None, head_extr
       <li><a href="{url(loc, 'contact')}">{e(u['contact'])}</a></li>
     </ul>
     <p class="locale-switch">
-      <a href="{alts_map[other]}" lang="{LOCALES[other][1]}" dir="{LOCALES[other][2]}">{'العربية' if other == 'ar' else 'Français'}</a>
+      <a href="{BASE + alts_map[other]}" lang="{LOCALES[other][1]}" dir="{LOCALES[other][2]}">{'العربية' if other == 'ar' else 'Français'}</a>
     </p>
   </div>
   <div class="wrap">
@@ -270,7 +288,7 @@ def piece_row(p, loc, n):
 def cross_band(loc, heading, copy, href, cta):
     return f"""
   <section class="band">
-    <img class="band__mark" src="/assets/logo/qob-mark-rev.svg" alt="" aria-hidden="true"
+    <img class="band__mark" src="{asset("/assets/logo/qob-mark-rev.svg")}" alt="" aria-hidden="true"
          width="210" height="140" loading="lazy">
     <div class="wrap band__inner">
       <h2>{e(heading)}</h2>
@@ -284,8 +302,8 @@ def build_home(loc):
     u = UI[loc]
     items = [p for p in PRODUCTS if p.get("active")][:3]
     rows = NL.join(piece_row(p, loc, i + 1) for i, p in enumerate(items))
-    canonical = url(loc)
-    alts = {l: url(l) for l in LOCALES}
+    canonical = canon(loc)
+    alts = {l: canon(l) for l in LOCALES}
     tag = u["tag"]
     head, _, tail = tag.partition(",")
 
@@ -293,7 +311,7 @@ def build_home(loc):
   <section class="wrap field hero">
     <p class="selvedge">QOB Atelier · {e(u['casablanca'])}</p>
     <div class="hero__plate">
-      <img src="/assets/logo/qob-logo-rev.svg" alt="QOB" width="1096" height="982">
+      <img src="{asset("/assets/logo/qob-logo-rev.svg")}" alt="QOB" width="1096" height="982">
     </div>
     <div class="hero__body">
       <p class="kicker reveal">{e(u['casablanca'])}</p>
@@ -330,8 +348,8 @@ def build_category(cat, loc):
     cid = cat["id"]
     name = t(cat["name"], loc, cid)
     items = [p for p in PRODUCTS if p["category"] == cid and p.get("active")]
-    canonical = url(loc, cid)
-    alts = {l: url(l, cid) for l in LOCALES}
+    canonical = canon(loc, cid)
+    alts = {l: canon(l, cid) for l in LOCALES}
     cross = CATS[cat["cross_link"]]
     cross_name = t(cross["name"], loc, cross["id"])
 
@@ -478,8 +496,8 @@ def build_product(p, loc):
     u = UI[loc]
     cat = CATS[p["category"]]
     name = t(p["name"], loc, p["name"]["fr"])
-    canonical = url(loc, p["category"], p["slug"])
-    alts = {l: url(l, p["category"], p["slug"]) for l in LOCALES}
+    canonical = canon(loc, p["category"], p["slug"])
+    alts = {l: canon(l, p["category"], p["slug"]) for l in LOCALES}
     guide = GUIDES[p["size_guide_id"]]
     orderable = any(v["stock"] > 0 for v in p["variants"])
 
@@ -680,8 +698,8 @@ def build_product(p, loc):
 
 def build_returns(loc):
     u = UI[loc]
-    canonical = url(loc, "retours-et-echanges")
-    alts = {l: url(l, "retours-et-echanges") for l in LOCALES}
+    canonical = canon(loc, "retours-et-echanges")
+    alts = {l: canon(l, "retours-et-echanges") for l in LOCALES}
     if loc == "fr":
         blocks = [
             ("Échanges", ["Un échange de taille est possible pendant 30 jours après réception. "
@@ -733,21 +751,21 @@ def build_root_redirect(pages):
 <title>QOB Atelier</title>
 <link rel="canonical" href="{SITE}/ma/">
 {alternates({l: url(l) for l in LOCALES})}
-<link rel="stylesheet" href="/assets/qob.css">
+<link rel="stylesheet" href="{asset("/assets/qob.css")}">
 <script>
   (function () {{
     var l = (navigator.language || "fr").toLowerCase();
-    location.replace(l.indexOf("ar") === 0 ? "/ma/ar/" : "/ma/");
+    location.replace(l.indexOf("ar") === 0 ? "{BASE}/ma/ar/" : "{BASE}/ma/");
   }})();
 </script>
 </head>
 <body>
 <main id="main" class="hero">
-  <img class="hero__logo" src="/assets/logo/qob-logo-rev.svg" alt="QOB" width="1096" height="982">
+  <img class="hero__logo" src="{asset("/assets/logo/qob-logo-rev.svg")}" alt="QOB" width="1096" height="982">
   <p class="hero__tag">QOB Atelier — Casablanca</p>
   <p class="locale-switch" style="justify-content:center;gap:var(--sp-5)">
-    <a href="/ma/">Français</a>
-    <a href="/ma/ar/" lang="ar" dir="rtl">العربية</a>
+    <a href="{BASE}/ma/">Français</a>
+    <a href="{BASE}/ma/ar/" lang="ar" dir="rtl">العربية</a>
   </p>
 </main>
 </body>
@@ -763,14 +781,14 @@ def build_404():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page introuvable — QOB Atelier</title>
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="/assets/qob.css">
+<link rel="stylesheet" href="{asset("/assets/qob.css")}">
 </head>
 <body>
 <main id="main" class="hero">
-  <img class="hero__logo" src="/assets/logo/qob-mark.svg" alt="" width="210" height="140" style="width:min(200px,40vw)">
+  <img class="hero__logo" src="{asset("/assets/logo/qob-mark.svg")}" alt="" width="210" height="140" style="width:min(200px,40vw)">
   <p class="hero__tag">Cette page n'existe pas.</p>
   <p class="hero__sub">Le lien est peut-être ancien, ou la pièce n'est plus en ligne.</p>
-  <p style="margin:0"><a class="btn" href="/ma/">Retour à l'accueil</a></p>
+  <p style="margin:0"><a class="btn" href="{BASE}/ma/">Retour à l'accueil</a></p>
 </main>
 </body>
 </html>
@@ -802,6 +820,11 @@ def build_sitemap(pages):
 
 
 def build_robots():
+    if IS_PREVIEW:
+        # A subpath build is a preview host whose canonicals name qob.co.
+        # Letting it be crawled invites the duplicate indexing this build
+        # exists to avoid, so it is closed entirely.
+        return write("robots.txt", "User-agent: *" + NL + "Disallow: /" + NL)
     return write("robots.txt",
                  "User-agent: *\n"
                  "Allow: /\n"

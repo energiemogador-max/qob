@@ -1,6 +1,2 @@
 User-agent: *
-Allow: /
-Disallow: /admin.html
-Disallow: /admin/
-
-Sitemap: https://qob.co/sitemap.xml
+Disallow: /
