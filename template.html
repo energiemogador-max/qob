@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QOB Atelier — Vêtement marocain, Casablanca</title>
+<meta name="description" content="QOB Atelier — djellaba, caftan et manteaux à capuche en laine du Moyen Atlas. Sfifa appliquée à la main, boutons aqad. Casablanca.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&family=Marcellus&family=IBM+Plex+Sans+Arabic:wght@400;500&display=swap">
+
+<style>
+/* ==========================================================================
+   QOB — template
+   Palette taken directly out of the logo file, not chosen alongside it.
+   The ground is #e8e4d9 exactly: the logo is a knockout on a beige plate,
+   so any other value shows the plate as a rectangle.
+   ========================================================================== */
+:root {
+  /* Every value below is sampled out of the logo file itself. */
+  --navy:  #182b59;   /* the script wordmark            */
+  --teal:  #1f7c9e;   /* the qob, mid tone              */
+  --teal-d:#1a7194;   /* the qob, shadow side           */
+  --gold:  #cca75d;   /* the small hood, zellige infill */
+  --beige: #e8e4d9;   /* the plate the artwork sits on  */
+  --paper: #f4f1e9;
+  --ink:   #16233f;
+
+  --font-display: "Marcellus", Georgia, serif;
+  --font-body: "Karla", system-ui, sans-serif;   /* the face named in inspire3.svg */
+  --font-arabic: "IBM Plex Sans Arabic", sans-serif;
+
+  --sp-1: .25rem; --sp-2: .5rem;  --sp-3: .75rem; --sp-4: 1rem;
+  --sp-5: 1.5rem; --sp-6: 2rem;   --sp-7: 3rem;   --sp-8: 4.5rem; --sp-9: 7rem;
+  --gutter: var(--sp-5);
+  --page: 1180px;
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+@media (min-width: 48rem) { :root { --gutter: var(--sp-7); } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--beige);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+body:lang(ar) { font-family: var(--font-arabic); }
+img, svg { display: block; max-width: 100%; }
+a { color: var(--teal); text-underline-offset: .25em; }
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+.vh {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+.wrap { max-width: var(--page); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* ── Header ───────────────────────────────────────────────────────────────
+   The brand is the real logo file, not a cursive webfont standing in for it. */
+.site-header {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--sp-4);
+  padding-block: var(--sp-4);
+  padding-inline: var(--gutter);
+  border-block-end: 1px solid rgb(27 49 91 / .12);
+  position: sticky; inset-block-start: 0; z-index: 20;
+  background: var(--beige);
+}
+.brand { display: block; line-height: 0; }
+.brand img { width: auto; height: 56px; }
+@media (min-width: 48rem) { .brand img { height: 72px; } }
+
+.site-nav ul {
+  display: flex; gap: var(--sp-5);
+  list-style: none; margin: 0; padding: 0;
+}
+.site-nav a {
+  font-size: .78rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; text-decoration: none; color: var(--navy);
+  transition: color 160ms var(--ease);
+}
+.site-nav a:hover { color: var(--teal); }
+@media (max-width: 40rem) {
+  .site-nav ul { gap: var(--sp-3); }
+  .site-nav a { font-size: .68rem; letter-spacing: .06em; }
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────────
+   The logo is the hero. It is rendered at full fidelity, crisp, with nothing
+   on top of it and nothing behind it. This is the fix: a detailed mark behind
+   a blur is neither a background nor a logo. Give it the room instead. */
+.hero {
+  text-align: center;
+  padding-block: var(--sp-8) var(--sp-7);
+  display: grid; justify-items: center; gap: var(--sp-5);
+}
+.hero__logo {
+  width: min(560px, 82vw);
+  height: auto;
+  /* animation-safe: the reveal never touches the mark's own geometry */
+}
+.hero__tag {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+  color: var(--navy);
+  margin: 0;
+  max-width: 34ch;
+  line-height: 1.4;
+}
+.hero__sub {
+  margin: 0; max-width: 52ch; color: rgb(22 35 63 / .78);
+  font-size: 1.02rem;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--teal); color: #fff;
+  padding: .9rem 2.2rem;
+  font-family: var(--font-body);
+  font-size: .8rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
+  border: 1px solid var(--teal);
+  transition: background 180ms var(--ease), color 180ms var(--ease);
+}
+.btn:hover { background: var(--teal-d); border-color: var(--teal-d); color: #fff; }
+.btn--ghost { background: transparent; color: var(--navy); border-color: var(--gold); }
+.btn--ghost:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+
+/* ── Gold rule ────────────────────────────────────────────────────────────
+   Borrowed from the sfifa: a flat braid closing an edge. Here it closes the
+   hero. One hairline, three widths, never repeated as an ornament. */
+.rule {
+  display: grid; justify-items: center; gap: 3px;
+  padding-block: var(--sp-6);
+}
+.rule i { display: block; background: var(--gold); height: 1px; }
+.rule i:nth-child(1) { width: 190px; }
+.rule i:nth-child(2) { width: 96px; }
+.rule i:nth-child(3) { width: 34px; }
+
+/* ── Sections ─────────────────────────────────────────────────────────── */
+.section { padding-block: var(--sp-8); }
+.section__head { text-align: center; margin-block-end: var(--sp-7); }
+.section__head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  color: var(--navy); margin: 0 0 var(--sp-3);
+  font-weight: 400;
+}
+.section__head p { margin: 0 auto; max-width: 56ch; color: rgb(22 35 63 / .72); }
+
+/* ── Products ─────────────────────────────────────────────────────────── */
+.grid {
+  display: grid; gap: var(--sp-5);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 34rem) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 60rem) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+.card {
+  background: var(--paper);
+  border: 1px solid rgb(27 49 91 / .10);
+  display: flex; flex-direction: column;
+  transition: border-color 200ms var(--ease);
+}
+.card:hover { border-color: var(--gold); }
+
+.card__media {
+  aspect-ratio: 4 / 5;
+  background: rgb(205 171 107 / .13);
+  display: grid; place-content: center; gap: var(--sp-2);
+  text-align: center; padding: var(--sp-4);
+  border-block-end: 1px solid rgb(27 49 91 / .08);
+}
+/* No photography exists yet, so no path is invented — each slot names the
+   file that belongs in it. */
+.card__slot {
+  margin: 0; font-size: .72rem; letter-spacing: .04em;
+  color: rgb(27 49 91 / .55); line-height: 1.5; overflow-wrap: anywhere;
+}
+.card__slot b {
+  display: block; text-transform: uppercase; letter-spacing: .12em;
+  color: var(--gold); margin-block-end: var(--sp-2); font-size: .68rem;
+}
+
+.card__body { padding: var(--sp-5); display: grid; gap: var(--sp-2); flex: 1; }
+.card__kicker {
+  margin: 0; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--teal);
+}
+.card__title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 1.24rem; color: var(--navy); margin: 0;
+}
+.card__meta { margin: 0; font-size: .86rem; color: rgb(22 35 63 / .66); }
+.card__price {
+  margin: var(--sp-2) 0 0; font-weight: 600; color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+.card__price small { font-weight: 400; color: rgb(22 35 63 / .55); }
+.card__cta { margin-block-start: auto; padding-block-start: var(--sp-4); }
+.card__cta a { font-size: .72rem; padding: .65rem 1.4rem; }
+
+/* ── Heritage band ────────────────────────────────────────────────────────
+   The only place the mark repeats, and it is crisp — scaled up and held at
+   low opacity, never blurred. No text sits on top of it. */
+.band {
+  position: relative; overflow: hidden;
+  background: var(--navy); color: var(--paper);
+  padding-block: var(--sp-9);
+}
+.band__mark {
+  position: absolute;
+  inset-block-start: 50%; inset-inline-end: -6%;
+  transform: translateY(-50%);
+  width: min(420px, 46vw); height: auto;
+  opacity: .16;
+  pointer-events: none;
+  /* The mark and the script overlap inside the artwork, so a rectangular crop
+     of the qob alone catches a fragment of the wordmark's tail. Fading the
+     bottom removes it and reads better as a watermark either way. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 94%);
+          mask-image: linear-gradient(to bottom, #000 62%, transparent 94%);
+}
+/* On a phone the band is narrow enough that the watermark would sit under the
+   copy. Push it clear rather than fading it further. */
+@media (max-width: 48rem) {
+  .band__mark {
+    inset-block-start: auto; inset-block-end: -8%;
+    inset-inline-end: -18%; transform: none;
+    width: 60vw; opacity: .12;
+  }
+  .band { padding-block: var(--sp-8); }
+}
+.band__inner { position: relative; max-width: 46ch; }
+.band h2 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  margin: 0 0 var(--sp-4); color: var(--paper);
+}
+.band p { margin: 0 0 var(--sp-4); color: rgb(244 241 233 / .82); }
+.band p:last-of-type { margin-block-end: var(--sp-6); }
+.band .btn--ghost { color: var(--paper); }
+.band .btn--ghost:hover { color: var(--navy); }
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+.site-footer {
+  background: var(--paper);
+  border-block-start: 1px solid rgb(27 49 91 / .12);
+  padding-block: var(--sp-7);
+  font-size: .88rem; color: rgb(22 35 63 / .7);
+}
+.footer-grid { display: grid; gap: var(--sp-5); }
+@media (min-width: 48rem) {
+  .footer-grid { grid-template-columns: 1fr auto; align-items: start; }
+}
+.footer-links { display: flex; flex-wrap: wrap; gap: var(--sp-4); list-style: none; margin: 0; padding: 0; }
+.footer-links a { color: var(--navy); text-decoration: none; }
+.footer-links a:hover { text-decoration: underline; }
+.legal { margin: var(--sp-5) 0 0; font-size: .78rem; color: rgb(22 35 63 / .55); max-width: 62ch; }
+
+/* ── Motion — one moment, on load, and nothing else ───────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { animation: rise 700ms var(--ease) backwards; }
+  .reveal:nth-child(1) { animation-delay: 60ms; }
+  .reveal:nth-child(2) { animation-delay: 200ms; }
+  .reveal:nth-child(3) { animation-delay: 300ms; }
+  .reveal:nth-child(4) { animation-delay: 380ms; }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <a class="brand" href="/ma/" aria-label="QOB Atelier — accueil">
+    <img src="assets/logo/qob-logo.svg" alt="QOB" width="715" height="530">
+  </a>
+  <nav class="site-nav" aria-label="Principale">
+    <ul>
+      <li><a href="/ma/djellaba-homme/">Djellaba</a></li>
+      <li><a href="/ma/caftan/">Caftan</a></li>
+      <li><a href="/ma/qob-coat/">QOB Coat</a></li>
+      <li><a href="/ma/panier/">Panier (0)</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- The logo, full size and completely unobstructed. -->
+  <section class="hero">
+    <img class="hero__logo reveal" src="assets/logo/qob-logo.svg"
+         alt="QOB — la capuche pointue de la djellaba" width="715" height="530">
+    <p class="hero__tag reveal">La capuche de la djellaba, coupée pour aujourd'hui.</p>
+    <p class="hero__sub reveal">
+      Laine du Moyen Atlas, sfifa appliquée à la main, boutons aqad noués un par un.
+      Fabriqué à Casablanca.
+    </p>
+    <p class="reveal" style="margin:0"><a class="btn" href="/ma/qob-coat/">Voir les pièces</a></p>
+  </section>
+
+  <div class="rule" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <section class="section wrap" id="pieces">
+    <div class="section__head">
+      <h2>Les pièces</h2>
+      <p>Trois coupes pour commencer. Chacune part d'un vêtement qui existe déjà — la djellaba, le caftan — et le remonte sur une carrure plus large.</p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="card__media">
+          <p class="card__slot"><b>Photo</b>/images/qob-coat-mlifa/main.webp</p>
+        </div>
+        <div class="card__body">
+          <p class="card__kicker">Dérivé de la djellaba</p>
+          <h3 class="card__title">QOB Coat Mlifa</h3>
+          <p class="card__meta">Laine vierge 480 g/m² · Indigo, écru · S–XXL</p>
+          <p class="card__price">2 400 MAD</p>
+          <p class="card__cta"><a class="btn btn--ghost" href="/ma/qob-coat/qob-coat-mlifa/">Voir la pièce</a></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__media">
+          <p class="card__slot"><b>Photo</b>/images/djellaba-homme-mlifa/main.webp</p>
+        </div>
+        <div class="card__body">
+          <p class="card__kicker">Pièce longue</p>
+          <h3 class="card__title">Djellaba Mlifa</h3>
+          <p class="card__meta">Laine vierge 420 g/m² · Écru, charbon · S–XXL</p>
+          <p class="card__price">1 900 MAD</p>
+          <p class="card__cta"><a class="btn btn--ghost" href="/ma/djellaba-homme/djellaba-homme-mlifa/">Voir la pièce</a></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__media">
+          <p class="card__slot"><b>Photo</b>/images/overshirt-sfifa/main.webp</p>
+        </div>
+        <div class="card__body">
+          <p class="card__kicker">Dérivé du caftan</p>
+          <h3 class="card__title">Overshirt Sfifa</h3>
+          <p class="card__meta">Laine et coton 320 g/m² · Indigo, charbon · S–XXL</p>
+          <p class="card__price">1 200 MAD <small>— épuisé</small></p>
+          <p class="card__cta"><a class="btn btn--ghost" href="/ma/overshirt/overshirt-sfifa/">Voir la pièce</a></p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="band">
+    <img class="band__mark" src="assets/logo/qob-mark-flat.svg" alt="" aria-hidden="true"
+         width="270" height="340" loading="lazy">
+    <div class="wrap band__inner">
+      <h2>Le qob</h2>
+      <p>
+        Le <em>qob</em> est la capuche pointue de la djellaba. Coupée en pointe,
+        elle tombe dans le dos quand elle n'est pas portée. C'est la forme qui
+        donne son nom à la marque.
+      </p>
+      <p>
+        La sfifa qui ferme chaque ouverture et l'aqad noué dans le même galon
+        viennent du même métier. Rien n'est rapporté : la fermeture est du fil.
+      </p>
+      <p><a class="btn btn--ghost" href="/ma/journal/">Lire le journal</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <ul class="footer-links">
+      <li><a href="/ma/retours-et-echanges/">Retours et échanges</a></li>
+      <li><a href="/ma/livraison/">Livraison</a></li>
+      <li><a href="/ma/journal/">Journal</a></li>
+      <li><a href="/ma/atelier/">L'atelier</a></li>
+      <li><a href="/ma/contact/">Contact</a></li>
+    </ul>
+    <p style="margin:0"><a href="#" lang="ar" dir="rtl" style="color:var(--navy);text-decoration:none">العربية</a></p>
+  </div>
+  <div class="wrap">
+    <!-- EU AI Act Article 50 — required wherever AI-generated visuals are
+         reachable from the EU. -->
+    <p class="legal">Certains visuels sont créés avec l'IA.</p>
+    <p class="legal">QOB Atelier · Casablanca · Prix en dirhams, paiement à la livraison.</p>
+  </div>
+</footer>
+
+</body>
+</html>
