@@ -1,0 +1,1136 @@
+{
+  "schema": "qob-products-index/2",
+  "generated": "2026-08-26",
+  "note": "Single source of truth. id == slug == folder name. Pages are generated FROM this file; nothing generates this file from pages. Stock lives on variants only, never on a product.",
+  "locales": [
+    "fr",
+    "ar",
+    "en"
+  ],
+  "default_locale": "fr",
+  "markets": {
+    "ma": {
+      "locales": [
+        "fr",
+        "ar"
+      ],
+      "currency": "MAD",
+      "payment": [
+        "cod"
+      ],
+      "transacts": true
+    },
+    "fr": {
+      "locales": [
+        "fr"
+      ],
+      "currency": "EUR",
+      "payment": [],
+      "transacts": false
+    },
+    "en": {
+      "locales": [
+        "en"
+      ],
+      "currency": "EUR",
+      "payment": [],
+      "transacts": false
+    }
+  },
+  "url_pattern": {
+    "category": "/{market}/{category}/",
+    "product": "/{market}/{category}/{slug}/",
+    "article": "/{market}/journal/{slug}/"
+  },
+  "image_convention": {
+    "main": "/images/{slug}/main.webp",
+    "gallery": "/images/{slug}/{n}.webp",
+    "detail": "/images/{slug}/detail/{construction_term}.webp",
+    "by_colourway": "/images/{slug}/{colourway}/{n}.webp",
+    "note": "No paths are invented. Every image field below is empty until real photography exists."
+  },
+  "colours": {
+    "indigo": {
+      "name": {
+        "fr": "Indigo",
+        "ar": "نيلي",
+        "en": "Indigo"
+      },
+      "hex": "#2C3A6B",
+      "note": "Tiznit / Tuareg indigo dyeing. The anchor colour."
+    },
+    "ecru": {
+      "name": {
+        "fr": "Écru",
+        "ar": "صوف خام",
+        "en": "Undyed"
+      },
+      "hex": "#D8CFBC",
+      "note": "Undyed Middle Atlas wool, no bleach, no dye."
+    },
+    "charbon": {
+      "name": {
+        "fr": "Charbon",
+        "ar": "فحمي",
+        "en": "Charcoal"
+      },
+      "hex": "#33333A",
+      "note": "Naturally dark fleece, not overdyed."
+    }
+  },
+  "glossary": {
+    "djellaba": {
+      "term": {
+        "fr": "Djellaba",
+        "ar": "جلابة",
+        "en": "Djellaba"
+      },
+      "definition": {
+        "fr": "Robe longue et ample à manches longues, fendue sur les côtés, avec un qob. Portée par les hommes comme par les femmes.",
+        "ar": "ثوب طويل واسع بأكمام طويلة وقلنسوة مدبّبة.",
+        "en": "A long, loose robe with full sleeves, split at the sides, with a qob. Worn by men and women alike."
+      }
+    },
+    "caftan": {
+      "term": {
+        "fr": "Caftan",
+        "ar": "قفطان",
+        "en": "Caftan"
+      },
+      "definition": {
+        "fr": "Robe longue sans capuche, fermée par une rangée d'aqad sur le devant. Elle se porte à l'intérieur, contrairement à la djellaba.",
+        "ar": "ثوب طويل بلا قلنسوة، يُغلق بصف من العقاد.",
+        "en": "A long hoodless robe closed by a row of aqad down the front. Unlike the djellaba it is worn indoors."
+      }
+    },
+    "jabador": {
+      "term": {
+        "fr": "Jabador",
+        "ar": "جابادور",
+        "en": "Jabador"
+      },
+      "definition": {
+        "fr": "Ensemble deux pièces : tunique courte et pantalon assorti, plus léger que la djellaba.",
+        "ar": "طقم من قطعتين: قميص قصير وسروال.",
+        "en": "A two-piece set — short tunic and matching trousers, lighter than a djellaba."
+      }
+    },
+    "gandoura": {
+      "term": {
+        "fr": "Gandoura",
+        "ar": "قندورة",
+        "en": "Gandoura"
+      },
+      "definition": {
+        "fr": "Tunique ample sans manches ni capuche, coupée droit. La pièce d'été.",
+        "ar": "قميص واسع بلا أكمام ولا قلنسوة.",
+        "en": "A wide sleeveless, hoodless tunic cut straight. The summer piece."
+      }
+    },
+    "sfifa": {
+      "term": {
+        "fr": "Sfifa",
+        "ar": "سفيفة",
+        "en": "Sfifa"
+      },
+      "definition": {
+        "fr": "Galon plat tressé à la main, appliqué le long des ouvertures d'un vêtement — encolure, poches, fentes. Il ferme le bord du tissu et le renforce.",
+        "ar": "شريط مضفور يدوياً يُطبَّق على فتحات الثوب.",
+        "en": "A flat hand-braided trim applied along a garment's openings — neckline, pockets, side vents. It closes and reinforces the raw edge."
+      }
+    },
+    "aqad": {
+      "term": {
+        "fr": "Aqad",
+        "ar": "عقاد",
+        "en": "Aqad"
+      },
+      "definition": {
+        "fr": "Bouton noué à la main dans le même galon que la sfifa, avec sa boucle. Il n'y a pas de bouton rapporté : la fermeture est du fil.",
+        "ar": "زر معقود يدوياً من نفس الشريط، مع عروته.",
+        "en": "A knot button hand-tied from the same braid as the sfifa, with its own loop. Nothing is attached — the fastening is thread."
+      }
+    },
+    "qob": {
+      "term": {
+        "fr": "Qob",
+        "ar": "قب",
+        "en": "Qob"
+      },
+      "definition": {
+        "fr": "La capuche pointue de la djellaba. Elle est coupée en pointe et tombe dans le dos quand elle n'est pas portée.",
+        "ar": "قلنسوة الجلابة المدبّبة.",
+        "en": "The pointed hood of a djellaba. Cut to a point, it falls down the back when not worn up."
+      }
+    },
+    "mlifa": {
+      "term": {
+        "fr": "Mlifa",
+        "ar": "مليفة",
+        "en": "Mlifa"
+      },
+      "definition": {
+        "fr": "Drap de laine épais et feutré du Moyen Atlas, tissé pour l'hiver.",
+        "ar": "قماش صوفي سميك من الأطلس المتوسط.",
+        "en": "A thick fulled wool cloth from the Middle Atlas, woven for winter."
+      }
+    },
+    "selham": {
+      "term": {
+        "fr": "Selham",
+        "ar": "سلهام",
+        "en": "Selham"
+      },
+      "definition": {
+        "fr": "Cape ample à capuche, sans manches, portée par-dessus. Aussi appelée burnous.",
+        "ar": "عباءة واسعة بقلنسوة، بلا أكمام.",
+        "en": "A wide hooded cape with no sleeves, worn over everything else. Also called a burnous."
+      }
+    }
+  },
+  "care_terms": {
+    "dry-clean": {
+      "fr": "Nettoyage à sec uniquement",
+      "ar": "التنظيف الجاف فقط",
+      "en": "Dry clean only"
+    },
+    "no-tumble": {
+      "fr": "Pas de sèche-linge",
+      "ar": "لا تستعمل المجففة",
+      "en": "Do not tumble dry"
+    },
+    "air-out": {
+      "fr": "Aérer après le port plutôt que laver",
+      "ar": "عرّضه للهواء بدل الغسل",
+      "en": "Air after wearing rather than washing"
+    },
+    "iron-low-reverse": {
+      "fr": "Repasser à basse température sur l'envers",
+      "ar": "اكويه على حرارة منخفضة من الداخل",
+      "en": "Iron low, on the reverse"
+    },
+    "indigo-bleeds": {
+      "fr": "L'indigo déteint aux premiers ports — c'est le propre de la teinture",
+      "ar": "النيلة تبهت في البداية، وهذا طبيعي",
+      "en": "Indigo rubs off at first — that is what the dye does"
+    }
+  },
+  "size_guides": {
+    "coat-oversized": {
+      "label": {
+        "fr": "Manteau oversize",
+        "ar": "معطف واسع",
+        "en": "Oversized coat"
+      },
+      "unit": "cm",
+      "measured": "garment_flat",
+      "measured_note": {
+        "fr": "Vêtement mesuré à plat, pas le corps.",
+        "ar": "قياسات الثوب مسطّحاً، ليس الجسم.",
+        "en": "Garment measured flat, not the body."
+      },
+      "points": {
+        "chest_flat": {
+          "fr": "Poitrine à plat",
+          "ar": "الصدر مسطّحاً",
+          "en": "Chest, flat"
+        },
+        "length_back": {
+          "fr": "Longueur dos",
+          "ar": "الطول من الخلف",
+          "en": "Back length"
+        },
+        "sleeve": {
+          "fr": "Manche",
+          "ar": "الكم",
+          "en": "Sleeve"
+        },
+        "shoulder": {
+          "fr": "Épaule à épaule",
+          "ar": "عرض الكتف",
+          "en": "Shoulder to shoulder"
+        },
+        "hood_height": {
+          "fr": "Hauteur de qob",
+          "ar": "ارتفاع القب",
+          "en": "Qob height"
+        }
+      },
+      "rows": {
+        "S": {
+          "chest_flat": 62,
+          "length_back": 104,
+          "sleeve": 58,
+          "shoulder": 54,
+          "hood_height": 40
+        },
+        "M": {
+          "chest_flat": 65,
+          "length_back": 107,
+          "sleeve": 59,
+          "shoulder": 56,
+          "hood_height": 41
+        },
+        "L": {
+          "chest_flat": 68,
+          "length_back": 110,
+          "sleeve": 60,
+          "shoulder": 58,
+          "hood_height": 42
+        },
+        "XL": {
+          "chest_flat": 71,
+          "length_back": 113,
+          "sleeve": 61,
+          "shoulder": 60,
+          "hood_height": 43
+        },
+        "XXL": {
+          "chest_flat": 74,
+          "length_back": 116,
+          "sleeve": 62,
+          "shoulder": 62,
+          "hood_height": 44
+        }
+      },
+      "_placeholder": true,
+      "_placeholder_note": "Numbers are structurally correct but not measured. Replace from a physical sample before launch."
+    },
+    "shirt-relaxed": {
+      "label": {
+        "fr": "Chemise ample",
+        "ar": "قميص واسع",
+        "en": "Relaxed shirt"
+      },
+      "unit": "cm",
+      "measured": "garment_flat",
+      "measured_note": {
+        "fr": "Vêtement mesuré à plat, pas le corps.",
+        "ar": "قياسات الثوب مسطّحاً، ليس الجسم.",
+        "en": "Garment measured flat, not the body."
+      },
+      "points": {
+        "chest_flat": {
+          "fr": "Poitrine à plat",
+          "ar": "الصدر مسطّحاً",
+          "en": "Chest, flat"
+        },
+        "length_back": {
+          "fr": "Longueur dos",
+          "ar": "الطول من الخلف",
+          "en": "Back length"
+        },
+        "sleeve": {
+          "fr": "Manche",
+          "ar": "الكم",
+          "en": "Sleeve"
+        },
+        "shoulder": {
+          "fr": "Épaule à épaule",
+          "ar": "عرض الكتف",
+          "en": "Shoulder to shoulder"
+        }
+      },
+      "rows": {
+        "S": {
+          "chest_flat": 58,
+          "length_back": 74,
+          "sleeve": 56,
+          "shoulder": 50
+        },
+        "M": {
+          "chest_flat": 61,
+          "length_back": 76,
+          "sleeve": 57,
+          "shoulder": 52
+        },
+        "L": {
+          "chest_flat": 64,
+          "length_back": 78,
+          "sleeve": 58,
+          "shoulder": 54
+        },
+        "XL": {
+          "chest_flat": 67,
+          "length_back": 80,
+          "sleeve": 59,
+          "shoulder": 56
+        },
+        "XXL": {
+          "chest_flat": 70,
+          "length_back": 82,
+          "sleeve": 60,
+          "shoulder": 58
+        }
+      },
+      "_placeholder": true,
+      "_placeholder_note": "Numbers are structurally correct but not measured. Replace from a physical sample before launch."
+    }
+  },
+  "categories": [
+    {
+      "id": "djellaba-homme",
+      "branch": "heritage",
+      "name": {
+        "fr": "Djellaba homme",
+        "ar": "جلابة رجالية",
+        "en": "Men's djellaba"
+      },
+      "cross_link": "qob-coat",
+      "seo": {
+        "target_queries": [
+          "djellaba homme moderne",
+          "djellaba oversize",
+          "djellaba homme jeune",
+          "djellaba moderne"
+        ],
+        "h1": {
+          "fr": "TODO: H1 djellaba homme moderne",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "intro": {
+          "fr": "TODO: 250-400 mots au-dessus de la grille. C'est ce texte qui classe.",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "cross_link_copy": {
+          "fr": "TODO: lien éditorial en corps de texte vers /qob-coat/",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "size_guide_id": "coat-oversized",
+      "active": true
+    },
+    {
+      "id": "djellaba-femme",
+      "branch": "heritage",
+      "name": {
+        "fr": "Djellaba femme",
+        "ar": "جلابة نسائية",
+        "en": "Women's djellaba"
+      },
+      "cross_link": "qob-coat",
+      "seo": {
+        "target_queries": [
+          "djellaba femme moderne",
+          "djellaba femme oversize",
+          "djellaba moderne femme"
+        ],
+        "h1": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "intro": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "cross_link_copy": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "size_guide_id": "coat-oversized",
+      "active": true
+    },
+    {
+      "id": "caftan",
+      "branch": "heritage",
+      "name": {
+        "fr": "Caftan",
+        "ar": "قفطان",
+        "en": "Caftan"
+      },
+      "cross_link": "overshirt",
+      "seo": {
+        "target_queries": [
+          "caftan moderne homme",
+          "caftan moderne",
+          "caftan minimaliste"
+        ],
+        "h1": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "intro": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "cross_link_copy": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "size_guide_id": "shirt-relaxed",
+      "active": true
+    },
+    {
+      "id": "jabador",
+      "branch": "heritage",
+      "name": {
+        "fr": "Jabador",
+        "ar": "جابادور",
+        "en": "Jabador"
+      },
+      "cross_link": "overshirt",
+      "seo": {
+        "target_queries": [
+          "jabador homme moderne",
+          "jabador oversize",
+          "jabador moderne"
+        ],
+        "h1": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "intro": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "cross_link_copy": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "size_guide_id": "shirt-relaxed",
+      "active": true
+    },
+    {
+      "id": "gandoura",
+      "branch": "heritage",
+      "name": {
+        "fr": "Gandoura",
+        "ar": "قندورة",
+        "en": "Gandoura"
+      },
+      "cross_link": "tees",
+      "seo": {
+        "target_queries": [
+          "gandoura homme moderne",
+          "gandoura oversize",
+          "gandoura moderne"
+        ],
+        "h1": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "intro": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "cross_link_copy": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "size_guide_id": "shirt-relaxed",
+      "active": true
+    },
+    {
+      "id": "burnous-selham",
+      "branch": "heritage",
+      "name": {
+        "fr": "Burnous · Selham",
+        "ar": "برنوس · سلهام",
+        "en": "Burnous · Selham"
+      },
+      "cross_link": "qob-coat",
+      "seo": {
+        "target_queries": [
+          "burnous marocain homme",
+          "selham moderne",
+          "burnous laine"
+        ],
+        "h1": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "intro": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "cross_link_copy": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "size_guide_id": "coat-oversized",
+      "active": true
+    },
+    {
+      "id": "qob-coat",
+      "branch": "street",
+      "name": {
+        "fr": "QOB Coat",
+        "ar": "معطف قب",
+        "en": "QOB Coat"
+      },
+      "cross_link": "djellaba-homme",
+      "seo": {
+        "target_queries": [
+          "qob coat",
+          "manteau à capuche marocain",
+          "manteau djellaba oversize"
+        ],
+        "h1": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "intro": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "cross_link_copy": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "size_guide_id": "coat-oversized",
+      "active": true
+    },
+    {
+      "id": "overshirt",
+      "branch": "street",
+      "name": {
+        "fr": "Overshirt",
+        "ar": "قميص خارجي",
+        "en": "Overshirt"
+      },
+      "cross_link": "caftan",
+      "seo": {
+        "target_queries": [
+          "overshirt laine",
+          "surchemise marocaine"
+        ],
+        "h1": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "intro": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "cross_link_copy": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "size_guide_id": "shirt-relaxed",
+      "active": true
+    },
+    {
+      "id": "tees",
+      "branch": "street",
+      "name": {
+        "fr": "T-shirts",
+        "ar": "تيشيرتات",
+        "en": "Tees"
+      },
+      "cross_link": "gandoura",
+      "seo": {
+        "target_queries": [
+          "t-shirt marocain",
+          "t-shirt amazigh"
+        ],
+        "h1": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "intro": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "cross_link_copy": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "size_guide_id": "shirt-relaxed",
+      "active": true
+    },
+    {
+      "id": "sarouel",
+      "branch": "street",
+      "name": {
+        "fr": "Sarouel",
+        "ar": "سروال",
+        "en": "Sarouel"
+      },
+      "cross_link": "jabador",
+      "seo": {
+        "target_queries": [
+          "sarouel homme",
+          "sarouel marocain moderne"
+        ],
+        "h1": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "intro": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "cross_link_copy": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "size_guide_id": "shirt-relaxed",
+      "active": true
+    }
+  ],
+  "_dummy_products_note": "The three products below are DUMMY DATA for building and testing the templates. They are not a real line sheet. Every one carries \"_dummy\": true and the validator refuses to pass with --strict while any remain.",
+  "products": [
+    {
+      "_dummy": true,
+      "id": "qob-coat-mlifa",
+      "slug": "qob-coat-mlifa",
+      "category": "qob-coat",
+      "subcategory": null,
+      "branch": "street",
+      "heritage_term": "djellaba",
+      "name": {
+        "fr": "QOB Coat Mlifa",
+        "ar": "معطف قب مليفة",
+        "en": "QOB Coat Mlifa"
+      },
+      "description": {
+        "fr": "TODO: description produit. Nommer le vêtement, la coupe, la longueur, la finition. Pas de copy marketing avant l'échantillon physique.",
+        "ar": "TODO",
+        "en": "TODO"
+      },
+      "price_mad": 2400,
+      "price_eur": null,
+      "construction": [
+        "sfifa",
+        "aqad",
+        "qob"
+      ],
+      "fabric": {
+        "composition": {
+          "fr": "100 % laine vierge, Moyen Atlas",
+          "ar": "100٪ صوف بكر، الأطلس المتوسط",
+          "en": "100% virgin wool, Middle Atlas"
+        },
+        "weight_gsm": 480,
+        "origin": {
+          "fr": "Moyen Atlas, Maroc",
+          "ar": "الأطلس المتوسط، المغرب",
+          "en": "Middle Atlas, Morocco"
+        }
+      },
+      "care": [
+        "dry-clean",
+        "no-tumble",
+        "air-out",
+        "indigo-bleeds"
+      ],
+      "size_guide_id": "coat-oversized",
+      "fit": {
+        "model_height_cm": 183,
+        "size_worn": "L"
+      },
+      "colourways": [
+        "indigo",
+        "ecru"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "images": {
+        "main": null,
+        "gallery": [],
+        "detail": [],
+        "by_colourway": {
+          "indigo": [],
+          "ecru": []
+        }
+      },
+      "seo": {
+        "title": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "description": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "active": true,
+      "featured": true,
+      "variants": [
+        {
+          "sku": "QOB-CTM-IND-S",
+          "colourway": "indigo",
+          "size": "S",
+          "stock": 4,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-CTM-IND-M",
+          "colourway": "indigo",
+          "size": "M",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-CTM-IND-L",
+          "colourway": "indigo",
+          "size": "L",
+          "stock": 6,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-CTM-IND-XL",
+          "colourway": "indigo",
+          "size": "XL",
+          "stock": 2,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-CTM-IND-XXL",
+          "colourway": "indigo",
+          "size": "XXL",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-CTM-ECR-S",
+          "colourway": "ecru",
+          "size": "S",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-CTM-ECR-M",
+          "colourway": "ecru",
+          "size": "M",
+          "stock": 3,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-CTM-ECR-L",
+          "colourway": "ecru",
+          "size": "L",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-CTM-ECR-XL",
+          "colourway": "ecru",
+          "size": "XL",
+          "stock": 1,
+          "price_override": 2600,
+          "barcode": null
+        }
+      ]
+    },
+    {
+      "_dummy": true,
+      "id": "djellaba-homme-mlifa",
+      "slug": "djellaba-homme-mlifa",
+      "category": "djellaba-homme",
+      "subcategory": null,
+      "branch": "heritage",
+      "heritage_term": "djellaba",
+      "name": {
+        "fr": "Djellaba Mlifa",
+        "ar": "جلابة مليفة",
+        "en": "Mlifa Djellaba"
+      },
+      "description": {
+        "fr": "TODO",
+        "ar": "TODO",
+        "en": "TODO"
+      },
+      "price_mad": 1900,
+      "price_eur": null,
+      "construction": [
+        "sfifa",
+        "aqad",
+        "qob"
+      ],
+      "fabric": {
+        "composition": {
+          "fr": "100 % laine vierge, Moyen Atlas",
+          "ar": "100٪ صوف بكر، الأطلس المتوسط",
+          "en": "100% virgin wool, Middle Atlas"
+        },
+        "weight_gsm": 420,
+        "origin": {
+          "fr": "Moyen Atlas, Maroc",
+          "ar": "الأطلس المتوسط، المغرب",
+          "en": "Middle Atlas, Morocco"
+        }
+      },
+      "care": [
+        "dry-clean",
+        "no-tumble",
+        "air-out"
+      ],
+      "size_guide_id": "coat-oversized",
+      "fit": {
+        "model_height_cm": 178,
+        "size_worn": "M"
+      },
+      "colourways": [
+        "ecru",
+        "charbon"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "images": {
+        "main": null,
+        "gallery": [],
+        "detail": [],
+        "by_colourway": {
+          "ecru": [],
+          "charbon": []
+        }
+      },
+      "seo": {
+        "title": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "description": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "active": true,
+      "featured": false,
+      "variants": [
+        {
+          "sku": "QOB-DJM-ECR-M",
+          "colourway": "ecru",
+          "size": "M",
+          "stock": 2,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-DJM-ECR-L",
+          "colourway": "ecru",
+          "size": "L",
+          "stock": 5,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-DJM-ECR-XL",
+          "colourway": "ecru",
+          "size": "XL",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-DJM-CHR-M",
+          "colourway": "charbon",
+          "size": "M",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-DJM-CHR-L",
+          "colourway": "charbon",
+          "size": "L",
+          "stock": 3,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-DJM-CHR-XL",
+          "colourway": "charbon",
+          "size": "XL",
+          "stock": 1,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-DJM-CHR-XXL",
+          "colourway": "charbon",
+          "size": "XXL",
+          "stock": 2,
+          "price_override": null,
+          "barcode": null
+        }
+      ]
+    },
+    {
+      "_dummy": true,
+      "id": "overshirt-sfifa",
+      "slug": "overshirt-sfifa",
+      "category": "overshirt",
+      "subcategory": null,
+      "branch": "street",
+      "heritage_term": "caftan",
+      "name": {
+        "fr": "Overshirt Sfifa",
+        "ar": "قميص خارجي سفيفة",
+        "en": "Sfifa Overshirt"
+      },
+      "description": {
+        "fr": "TODO",
+        "ar": "TODO",
+        "en": "TODO"
+      },
+      "price_mad": 1200,
+      "price_eur": null,
+      "construction": [
+        "sfifa",
+        "aqad"
+      ],
+      "fabric": {
+        "composition": {
+          "fr": "60 % laine, 40 % coton",
+          "ar": "60٪ صوف، 40٪ قطن",
+          "en": "60% wool, 40% cotton"
+        },
+        "weight_gsm": 320,
+        "origin": {
+          "fr": "Maroc",
+          "ar": "المغرب",
+          "en": "Morocco"
+        }
+      },
+      "care": [
+        "dry-clean",
+        "no-tumble",
+        "iron-low-reverse"
+      ],
+      "size_guide_id": "shirt-relaxed",
+      "fit": {
+        "model_height_cm": 183,
+        "size_worn": "L"
+      },
+      "colourways": [
+        "indigo",
+        "charbon"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "images": {
+        "main": null,
+        "gallery": [],
+        "detail": [],
+        "by_colourway": {
+          "indigo": [],
+          "charbon": []
+        }
+      },
+      "seo": {
+        "title": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        },
+        "description": {
+          "fr": "TODO",
+          "ar": "TODO",
+          "en": "TODO"
+        }
+      },
+      "active": true,
+      "featured": false,
+      "variants": [
+        {
+          "sku": "QOB-OSS-IND-S",
+          "colourway": "indigo",
+          "size": "S",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-OSS-IND-M",
+          "colourway": "indigo",
+          "size": "M",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-OSS-IND-L",
+          "colourway": "indigo",
+          "size": "L",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-OSS-CHR-M",
+          "colourway": "charbon",
+          "size": "M",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        },
+        {
+          "sku": "QOB-OSS-CHR-L",
+          "colourway": "charbon",
+          "size": "L",
+          "stock": 0,
+          "price_override": null,
+          "barcode": null
+        }
+      ]
+    }
+  ]
+}
